@@ -28,7 +28,7 @@ More projects will be added as I build and grow.
 ## 📩 Contact
 Let’s connect or work together!
 
-- *Instagram:* mhiiorga_tersoo
+- *Instagram:* @mhiiorga_tersoo
 - *Email:* donminictersoo@gmail.com 
 
 ---
