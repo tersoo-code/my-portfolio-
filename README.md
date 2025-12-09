@@ -2,10 +2,10 @@
 ### Web Developer • Creative Builder
 
 Welcome to *Tersoo_code*, my personal portfolio where I showcase my work, skills, and the digital projects I build.  
-This website is designed to be simple, clean, and professional — representing who I am and the value I bring.
+This website is designed to be simple, clean, and professional representing who I am and the value I bring.
 
 ## 🔹 About Me
-Hi, I'm *Tersoo, a passionate and self-taught **Web Developer* who enjoys creating clean, modern, and user-friendly websites.  
+Hi, I'm *Tersoo, a passionate and self-taught **Web Developer* who enjoys creating clean, modern, and user friendly websites.  
 I focus on building simple solutions that work  fast, responsive, and easy to manage.
 
 ## 🚀 Services I Offer
