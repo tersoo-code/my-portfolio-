@@ -1,33 +1,219 @@
-{
-  "name": "swiftsend-backend",
-  "version": "1.0.0",
-  "main": "server.js",
-  "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js",
-    "migrate": "node ./migrations/run.js"
-  },
-  "dependencies": {
-    "axios": "^1.0.0",
-    "bcrypt": "^5.0.1",
-    "body-parser": "^1.19.0",
-    "dotenv": "^16.0.0",
-    "express": "^4.17.1",
-    "jsonwebtoken": "^9.0.0",
-    "pg": "^8.8.0",
-    "sequelize": "^6.32.0",
-    "uuid": "^9.0.0"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.22"
-  }
-}PORT=3000
-DATABASE_URL=postgres://user:pass@localhost:5432/swiftsend
-JWT_SECRET=changeme
-FLW_SECRET_KEY=FLWSECK_TEST-xxxx
-FLW_PUBLIC_KEY=FLWPUBK_TEST-xxxx
-FLW_ENCRYPTION_KEY=FLWENCK_TEST-xxxx
-FLW_REDIRECT_URL=http://localhost:3000/payments/redirect
-TIKTOK_CLIENT_ID=your_tiktok_client_id
-TIKTOK_CLIENT_SECRET=your_tiktok_secret
-TIKTOK_REDIRECT_URL=http://localhost:3000/auth/tiktok/callback
+<!doctype html>
+<html lang="en">
+<head><meta name="description" content="A modern creative portfolio showcasing my works in web development, design, digital media, and branding. Explore my services, projects, and contact me for collaboration.">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TersooPremium Site (Full)</title>
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- EmailJS (browser v4) - single include and correct init -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script type="text/javascript">
+    (function(){
+      try {
+        // EmailJS public key inserted as requested
+        // PUBLIC KEY (placed here): S7KWwnWm5lwVHZR5V
+        if (window.emailjs && typeof window.emailjs.init === 'function') {
+          window.emailjs.init('S7KWwnWm5lwVHZR5V');
+        }
+      } catch (e) {
+        console.warn('EmailJS init failed (ignored in demo):', e);
+      }
+    })();
+  </script>
+
+  <!-- Main JS (deferred) -->
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+
+  <!-- PRELOADER -->
+  <div id="preloader" class="preloader">
+    <div class="preloader-inner">
+      <div class="brand">Tersoo</div>
+      <div class="loader-dot"></div>
+    </div>
+  </div>
+
+  <!-- animated cursor -->
+  <div id="cursor" class="cursor" aria-hidden="true"></div>
+
+  <!-- HEADER / NAV -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">tdm</div>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#timeline">Timeline</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#blog">Blog</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button id="themeToggle" class="icon-btn" title="Toggle theme"><i class="fa fa-moon"></i></button>
+        <button id="adminBtn" class="btn small">Admin</button>
+        <i id="menuBtn" class="fa fa-bars menu-btn" role="button" aria-label="Toggle menu"></i>
+      </div>
+    </nav>
+  </header>
+
+  <!-- HERO with layered shapes (parallax) -->
+  <section id="hero" class="hero-section">
+    <div class="hero-layers">
+      <div class="layer layer-back"></div>
+      <div class="layer layer-mid"></div>
+      <div class="layer layer-front"></div>
+    </div>
+
+    <div class="hero-content">
+      <h1 class="hero-title">Craft. Create. Impact.</h1>
+      <p class="hero-sub">Premium design, smooth interactions and a gallery you can control.</p>
+      <div class="hero-cta">
+        <a href="#gallery" class="btn">View Gallery</a>
+        <a href="#services" class="btn ghost">My Services</a>
+      </div>
+    </div>
+
+    <picture>
+      <source srcset="images/hero.webp" type="image/webp">
+      <img src="images/hero.jpg" alt="Hero image" class="hero-img" loading="lazy">
+    </picture>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="section">
+    <h2 class="section-title">Services</h2>
+    <div class="services-grid">
+      <div class="card">
+        <h3>Web Design</h3>
+        <p>Modern responsive websites built with care.</p>
+      </div>
+      <div class="card">
+        <h3>Branding</h3>
+        <p>Visual identity that stands out in crowded spaces.</p>
+      </div>
+      <div class="card">
+        <h3>Photography</h3>
+        <p>Story-driven images to elevate your brand.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section id="timeline" class="section">
+    <h2 class="section-title">Timeline</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="time">2022</div>
+        <div class="content"><h4>Started web journey</h4><p>Learned HTML, CSS and first projects.</p></div>
+      </div>
+      <div class="timeline-item">
+        <div class="time">2023</div>
+        <div class="content"><h4>First clients</h4><p>Built two small business websites.</p></div>
+      </div>
+      <div class="timeline-item">
+        <div class="time">2025</div>
+        <div class="content"><h4>Scale & learning</h4><p>Improved UX, animations and portfolios.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery" class="section">
+    <h2 class="section-title">Gallery</h2>
+
+    <div class="gallery-controls">
+      <input id="uploadInput" type="file" accept="image/*" style="display:legacy" />
+      <button id="addImageBtn" class="btn small">Add Image</button>
+      <button id="clearGalleryBtn" class="btn small ghost">Clear Stored Images</button>
+    </div>
+
+    <div class="gallery" id="galleryGrid" aria-live="polite">
+      <!-- images loaded dynamically from localStorage -->
+    </div>
+  </section>
+
+  <!-- BLOG -->
+  <section id="blog" class="section">
+    <h2 class="section-title">Blog</h2>
+
+    <div class="blog-controls">
+      <button id="newPostBtn" class="btn small">New Post</button>
+    </div>
+
+    <div id="posts" class="posts-grid" aria-live="polite">
+      <!-- posts loaded from localStorage -->
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials" class="section">
+    <h2 class="section-title">Testimonials</h2>
+    <div class="testimonial-slider" id="testimonialContainer">
+      <div class="testimonial"><p>"Amazing work very creative!"</p><strong> Client A</strong></div>
+      <div class="testimonial"><p>"Delivered on time and awesome communication."</p><strong> Client B</strong></div>
+      <div class="testimonial"><p>"Got more clients thanks to their designs."</p><strong> Client C</strong></div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section">
+    <h2 class="section-title">Contact</h2>
+
+    <form id="contactForm" class="contact-form">
+      <!-- ids are important for script.js: name, email, message -->
+      <input id="name" type="text" name="from_name" placeholder="Your Name" required>
+      <input id="email" type="email" name="reply_to" placeholder="Your Email" required>
+      <textarea id="message" name="message" placeholder="Your Message..." required></textarea>
+      <button type="submit" class="btn">Send Message</button>
+      <div id="contactMsg" class="contact-msg" aria-live="polite"></div>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div>© <span id="yearSpan"></span> Tersoo All Rights Reserved</div>
+      <div class="foot-links"><a href="#">Instagram</a> • <a href="#">X</a></div>
+    </div>
+  </foo++++++ter>
+
+  <!-- ADMIN MODAL (client-side demo) -->
+  <div id="adminModal" class="modal" aria-hidden="true" style="display:none">
+    <div class="modal-inner">
+      <button class="close-modal" id="closeAdmin" aria-label="Close">&times;</button>
+      <h3>Admin Panel (Demo)</h3>
+
+      <div id="adminLogin">
+        <p><small>Demo password: <strong>password123</strong></small></p>
+        <input id="adminPass" type="password" placeholder="Enter admin password" />
+        <button id="loginAdminBtn" class="btn small">Login</button>
+      </div>
+
+      <div id="adminPanel" style="display:contents">
+        <h4>Manage Gallery</h4>
+        <button id="adminAddBtn" class="btn small">Add Image</button>
+        <button id="adminClearBtn" class="btn small ghost">Clear Stored Images</button>
+
+        <h4 style="margin-top:14px">Manage Blog</h4>
+        <button id="adminNewPostBtn" class="btn small">New Post</button>
+
+        <hr style="margin:14px 0">
+        <button id="logoutAdminBtn" class="btn small ghost">Logout</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
