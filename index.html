@@ -298,7 +298,26 @@
 <!-- AUTH BUTTON IN NAV -->
 <button id="openAuth" class="btn ghost auth-btn">Login</button>
 </html><button id="logoutBtn" class="btn ghost auth-btn" style="display:none;">Logout</button>
-</html>
+</html><!-- PROFILE MODAL -->
+<div id="profileModal" class="auth-modal">
+  <div class="auth-box">
+    <h2>Edit Profile</h2>
+
+    <input type="text" id="profileUsername" placeholder="Username" />
+    <textarea id="profileBio" placeholder="Bio"></textarea>
+
+    <label class="upload-label">Profile Picture</label>
+    <input type="file" id="profileImage" accept="image/*" />
+
+    <button id="saveProfileBtn" class="btn primary">Save Profile</button>
+
+    <button id="closeProfile" class="close-auth">×</button>
+  </div>
+</div>
+
+<!-- BUTTON TO OPEN PROFILE -->
+<button id="openProfile" class="btn ghost auth-btn" style="display:none;">Profile</button>
+
 
 
 
