@@ -156,7 +156,45 @@ saveProfileBtn.addEventListener("click", async () => {
     document.getElementById("profileBio").value = data.bio || "";
   }
 });
+// POST MODAL LOGIC
+const postModal = document.getElementById("postModal");
+const openPost = document.getElementById("openPost");
+const closePost = document.getElementById("closePost");
 
+openPost.addEventListener("click", () => {
+  postModal.style.display = "flex";
+});
+
+closePost.addEventListener("click", () => {
+  postModal.style.display = "none";
+});
+const uploadPostBtn = document.getElementById("uploadPostBtn");
+
+uploadPostBtn.addEventListener("click", async () => {
+  const user = auth.currentUser;
+  if (!user) return alert("You must be logged in");
+
+  const imageFile = document.getElementById("postImage").files[0];
+  const caption = document.getElementById("postCaption").value;
+
+  if (!imageFile) return alert("Please select an image");
+
+  // Upload image to Firebase Storage
+  const storageRef = storage.ref(`posts/${user.uid}/${Date.now()}`);
+  await storageRef.put(imageFile);
+  const imageURL = await storageRef.getDownloadURL();
+
+  // Save post data to Firestore
+  await db.collection("posts").add({
+    userId: user.uid,
+    caption,
+    imageURL,
+    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+  });
+
+  alert("Post uploaded!");
+  postModal.style.display = "none";
+});
 
 
 
