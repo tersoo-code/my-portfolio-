@@ -205,12 +205,32 @@ db.collection("posts")
     snapshot.forEach(doc => {
       const post = doc.data();
 
-      const postHTML = `
-        <div class="gallery-item">
-          <img src="${post.imageURL}" alt="Post Image">
-          <figcaption>${post.caption}</figcaption>
-        </div>
-      `;
+  const postHTML = `
+  <div class="post-card">
+    <img src="${post.imageURL}" class="post-image">
+
+    <div class="post-content">
+      <p class="post-caption">${post.caption}</p>
+
+      <div class="post-actions">
+        <button class="likeBtn" data-id="${doc.id}">❤️ Like</button>
+        <span class="likeCount">${post.likes?.length || 0} likes</span>
+      </div>
+
+      <div class="comment-section">
+        <input type="text" class="commentInput" placeholder="Write a comment...">
+        <button class="commentBtn" data-id="${doc.id}">Post</button>
+
+        <div class="commentList"></div>
+      </div>
+    </div>
+  </div>
+`;
+        
+          
+
+  
+
 
       feedContainer.innerHTML += postHTML;
     });
@@ -223,5 +243,6 @@ auth.onAuthStateChanged(user => {
     openPost.style.display = "none";
   }
 });
+
 
 
