@@ -144,7 +144,19 @@ saveProfileBtn.addEventListener("click", async () => {
     openAuth.style.display = "inline-block";
     openProfile.style.display = "none"; // hide profile button
   }
+});openProfile.addEventListener("click", async () => {
+  profileModal.style.display = "flex";
+
+  const user = auth.currentUser;
+  const doc = await db.collection("users").doc(user.uid).get();
+
+  if (doc.exists) {
+    const data = doc.data();
+    document.getElementById("profileUsername").value = data.username || "";
+    document.getElementById("profileBio").value = data.bio || "";
+  }
 });
+
 
 
 
