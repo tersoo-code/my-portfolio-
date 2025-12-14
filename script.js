@@ -108,6 +108,35 @@ openProfile.addEventListener("click", () => {
 
 closeProfile.addEventListener("click", () => {
   profileModal.style.display = "none";
+});const saveProfileBtn = document.getElementById("saveProfileBtn");
+
+saveProfileBtn.addEventListener("click", async () => {
+  const user = auth.currentUser;
+  if (!user) return alert("You must be logged in");
+
+  const username = document.getElementById("profileUsername").value;
+  const bio = document.getElementById("profileBio").value;
+  const imageFile = document.getElementById("profileImage").files[0];
+
+  let photoURL = null;
+
+  // Upload profile picture if selected
+  if (imageFile) {
+    const storageRef = storage.ref(`profiles/${user.uid}`);
+    await storageRef.put(imageFile);
+    photoURL = await storageRef.getDownloadURL();
+  }
+
+  // Save profile data to Firestore
+  await db.collection("users").doc(user.uid).set({
+    username,
+    bio,
+    photoURL
+  }, { merge: true });
+
+  alert("Profile updated!");
+  profileModal.style.display = "none";
 });
+
 
 
