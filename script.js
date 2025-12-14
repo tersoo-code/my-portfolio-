@@ -97,5 +97,17 @@ auth.onAuthStateChanged(user => {
   } else {
     logoutBtn.style.display = "none";
   }
+});// PROFILE MODAL LOGIC
+const profileModal = document.getElementById("profileModal");
+const openProfile = document.getElementById("openProfile");
+const closeProfile = document.getElementById("closeProfile");
+
+openProfile.addEventListener("click", () => {
+  profileModal.style.display = "flex";
 });
+
+closeProfile.addEventListener("click", () => {
+  profileModal.style.display = "none";
+});
+
 
