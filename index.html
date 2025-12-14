@@ -119,14 +119,16 @@
     <h2>Journey</h2>
     <div class="timeline">
       <div class="timeline-item">
-        <span class="timeline-year">2022</span>
+        <span class="timeline-year">2025
+        </span>
         <h3>The spark</h3>
         <p>
           Started with the basics — HTML, CSS, and a few small personal projects that made the web feel real to me.
         </p>
       </div>
       <div class="timeline-item">
-        <span class="timeline-year">2023</span>
+        <span class="timeline-year">2025
+        </span>
         <h3>First real clients</h3>
         <p>
           Designed and shipped websites for small businesses, learning how to solve real problems and meet deadlines.
@@ -274,9 +276,30 @@
 <!-- ✅ THEN LOAD YOUR MAIN JS -->
 <script src="main.js"></script>
 
-</body>
+</body><!-- AUTH MODAL -->
+<div id="authModal" class="auth-modal">
+  <div class="auth-box">
+    <h2 id="authTitle">Create Account</h2>
+
+    <input type="email" id="authEmail" placeholder="Email" />
+    <input type="password" id="authPassword" placeholder="Password" />
+
+    <button id="authActionBtn" class="btn primary">Sign Up</button>
+
+    <p class="auth-switch">]
+      Already have an account?
+      <span id="switchToLogin">Login</span>
+    </p>
+
+    <button id="closeAuth" class="close-auth">×</button>
+  </div>
+</div>
+
+<!-- AUTH BUTTON IN NAV -->
+<button id="openAuth" class="btn ghost auth-btn">Login</button>
 </html>
 </html>
+
 
 
 
