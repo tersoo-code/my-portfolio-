@@ -136,7 +136,16 @@ saveProfileBtn.addEventListener("click", async () => {
 
   alert("Profile updated!");
   profileModal.style.display = "none";
+});auth.onAuthStateChanged(user => {
+  if (user) {
+    openAuth.style.display = "none";
+    openProfile.style.display = "inline-block"; // show profile button
+  } else {
+    openAuth.style.display = "inline-block";
+    openProfile.style.display = "none"; // hide profile button
+  }
 });
+
 
 
 
