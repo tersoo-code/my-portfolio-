@@ -195,7 +195,33 @@ uploadPostBtn.addEventListener("click", async () => {
   alert("Post uploaded!");
   postModal.style.display = "none";
 });
+const feedContainer = document.getElementById("feedContainer");
 
+db.collection("posts")
+  .orderBy("timestamp", "desc")
+  .onSnapshot(snapshot => {
+    feedContainer.innerHTML = "";
 
+    snapshot.forEach(doc => {
+      const post = doc.data();
+
+      const postHTML = `
+        <div class="gallery-item">
+          <img src="${post.imageURL}" alt="Post Image">
+          <figcaption>${post.caption}</figcaption>
+        </div>
+      `;
+
+      feedContainer.innerHTML += postHTML;
+    });
+  });
+
+auth.onAuthStateChanged(user => {
+  if (user) {
+    openPost.style.display = "inline-block";
+  } else {
+    openPost.style.display = "none";
+  }
+});
 
 
