@@ -83,4 +83,19 @@ authActionBtn.addEventListener("click", () => {
       })
       .catch(err => alert(err.message));
   }
+});const logoutBtn = document.getElementById("logoutBtn");
+
+logoutBtn.addEventListener("click", () => {
+  auth.signOut().then(() => {
+    alert("Logged out");
+  });
 });
+
+auth.onAuthStateChanged(user => {
+  if (user) {
+    logoutBtn.style.display = "inline-block";
+  } else {
+    logoutBtn.style.display = "none";
+  }
+});
+
