@@ -235,7 +235,20 @@ db.collection("posts")
       feedContainer.innerHTML += postHTML;
     });
   });
+// Load comments
+db.collection("posts").doc(doc.id).collection("comments")
+  .orderBy("timestamp", "asc")
+  .onSnapshot(commentSnap => {
+    const commentList = postElement.querySelector(".commentList");
+    commentList.innerHTML = "";
 
+    commentSnap.forEach(c => {
+      const data = c.data();
+      commentList.innerHTML += `
+        <div class="commentItem">${data.text}</div>
+      `;
+    });
+  });
 auth.onAuthStateChanged(user => {
   if (user) {
     openPost.style.display = "inline-block";
@@ -243,6 +256,51 @@ auth.onAuthStateChanged(user => {
     openPost.style.display = "none";
   }
 });
+document.addEventListener("click", async (e) => {
+  if (e.target.classList.contains("likeBtn")) {
+    const postId = e.target.getAttribute("data-id");
+    const user = auth.currentUser;
 
+    if (!user) return alert("You must be logged in");
+
+    const postRef = db.collection("posts").doc(postId);
+    const postDoc = await postRef.get();
+    const postData = postDoc.data();
+
+    let likes = postData.likes || [];
+
+    if (likes.includes(user.uid)) {
+      // Unlike
+      likes = likes.filter(id => id !== user.uid);
+    } else {
+      // Like
+      likes.push(user.uid);
+    }
+
+    await postRef.update({ likes });
+  }
+});
+document.addEventListener("click", async (e) => {
+  if (e.target.classList.contains("commentBtn")) {
+    const postId = e.target.getAttribute("data-id");
+    const user = auth.currentUser;
+
+    if (!user) return alert("You must be logged in");
+
+    const input = e.target.previousElementSibling;
+    const commentText = input.value.trim();
+    if (!commentText) return;
+
+    const comment = {
+      userId: user.uid,
+      text: commentText,
+      timestamp: Date.now()
+    };
+
+    await db.collection("posts").doc(postId).collection("comments").add(comment);
+
+    input.value = "";
+  }
+});
 
 
