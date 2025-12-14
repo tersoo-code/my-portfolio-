@@ -7,7 +7,7 @@
   <meta name="description" content="I design and build digital experiences – modern websites, bold brands, and visual stories that stick." />
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body><
+<body><<button id="openPost" class="btn primary auth-btn" style="display:none;">Create Post</button>
   <!-- NAVBAR -->
   <header class="navbar">
     <div class="logo">Nexthub_NG.</div>
@@ -317,6 +317,19 @@
 
 <!-- BUTTON TO OPEN PROFILE -->
 <button id="openProfile" class="btn ghost auth-btn" style="display:none;">Profile</button>
+<!-- POST UPLOAD MODAL -->
+<div id="postModal" class="auth-modal">
+  <div class="auth-box">
+    <h2>Create Post</h2>
+
+    <input type="file" id="postImage" accept="image/*" />
+    <textarea id="postCaption" placeholder="Write a caption..."></textarea>
+
+    <button id="uploadPostBtn" class="btn primary">Upload Post</button>
+
+    <button id="closePost" class="close-auth">×</button>
+  </div>
+</div>
 
 
 
