@@ -197,11 +197,60 @@ uploadPostBtn.addEventListener("click", async () => {
 });
 const feedContainer = document.getElementById("feedContainer");
 
-db.collection("posts")
-  .orderBy("timestamp", "desc")
-  .onSnapshot(snapshot => {
-    feedContainer.innerHTML = "";
+auth.onAuthStateChanged(async (user) => {
+  if (!user) return;
 
+  const userDoc = await db.collection("users").doc(user.uid).get();
+  const following = userDoc.data().following || [];
+
+  // If user follows nobody
+  if (following.length === 0) {
+    feedContainer.innerHTML = `
+      <p style="text-align:center; margin-top:20px;">
+        You’re not following anyone yet.<br>
+        Follow users to see their posts.
+      </p>
+    `;
+    return;
+  }
+
+  // Load posts ONLY from followed users
+  db.collection("posts")
+    .where("userId", "in", following)
+    .orderBy("timestamp", "desc")
+    .onSnapshot(snapshot => {
+      feedContainer.innerHTML = "";
+
+      snapshot.forEach(doc => {
+        const post = doc.data();
+
+        const postHTML = `
+          <div class="post-card">
+            <img src="${post.imageURL}" class="post-image">
+
+            <div class="post-content">
+              <p class="post-caption">${post.caption}</p>
+
+              <button class="followBtn" data-user="${post.userId}">Follow</button>
+
+              <div class="post-actions">
+                <button class="likeBtn" data-id="${doc.id}">❤️ Like</button>
+                <span class="likeCount">${post.likes?.length || 0} likes</span>
+              </div>
+
+              <div class="comment-section">
+                <input type="text" class="commentInput" placeholder="Write a comment...">
+                <button class="commentBtn" data-id="${doc.id}">Post</button>
+                <div class="commentList"></div>
+              </div>
+            </div>
+          </div>
+        `;
+
+        feedContainer.innerHTML += postHTML;
+      });
+    });
+});
     snapshot.forEach(doc => {
       const post = doc.data();
 
@@ -225,7 +274,7 @@ db.collection("posts")
       </div>
     </div>
   </div>
-`;
+
         
           
 
@@ -241,7 +290,19 @@ db.collection("posts").doc(doc.id).collection("comments")
   .onSnapshot(commentSnap => {
     const commentList = postElement.querySelector(".commentList");
     commentList.innerHTML = "";
+auth.onAuthStateChanged(async (user) => {
+  if (!user) return;
 
+  const userDoc = await db.collection("users").doc(user.uid).get();
+  const following = userDoc.data().following || [];
+
+  document.querySelectorAll(".followBtn").forEach(btn => {
+    const targetUser = btn.getAttribute("data-user");
+    if (following.includes(targetUser)) {
+      btn.textContent = "Following";
+    }
+  });
+});
     commentSnap.forEach(c => {
       const data = c.data();
       commentList.innerHTML += `
@@ -302,5 +363,52 @@ document.addEventListener("click", async (e) => {
     input.value = "";
   }
 });
+const postHTML = `
+  <div class="post-card">
+    <img src="${post.imageURL}" class="post-image">
 
+    <div class="post-content">
+      <p class="post-caption">${post.caption}</p>
+
+      <button class="followBtn" data-user="${post.userId}">Follow</button>
+
+      <div class="post-actions">
+        <button class="likeBtn" data-id="${doc.id}">❤️ Like</button>
+        <span class="likeCount">${post.likes?.length || 0} likes</span>
+      </div>
+
+      <div class="comment-section">
+        <input type="text" class="commentInput" placeholder="Write a comment...">
+        <button class="commentBtn" data-id="${doc.id}">Post</button>
+        <div class="commentList"></div>
+      </div>
+    </div>
+  </div>
+`;
+document.addEventListener("click", async (e) => {
+  if (e.target.classList.contains("followBtn")) {
+    const targetUserId = e.target.getAttribute("data-user");
+    const user = auth.currentUser;
+
+    if (!user) return alert("You must be logged in");
+
+    const userRef = db.collection("users").doc(user.uid);
+    const userDoc = await userRef.get();
+    const userData = userDoc.data();
+
+    let following = userData.following || [];
+
+    if (following.includes(targetUserId)) {
+      // Unfollow
+      following = following.filter(id => id !== targetUserId);
+      e.target.textContent = "Follow";
+    } else {
+      // Follow
+      following.push(targetUserId);
+      e.target.textContent = "Following";
+    }
+
+    await userRef.update({ following });
+  }
+});
 
