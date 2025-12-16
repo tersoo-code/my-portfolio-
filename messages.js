@@ -30,7 +30,7 @@ auth.onAuthStateChanged(async (user) => {
   const imageBtn = document.getElementById("imageBtn");
   const voiceBtn = document.getElementById("voiceBtn");
 
-  // ✅ LISTEN FOR MESSAGES (text + image + audio + timestamps + seen)
+  // ✅ LISTEN FOR MESSAGES (text + image + audio + timestamps + seen + reactions)
   let lastMessageCount = 0;
 
   db.collection("chats").doc(chatId).collection("messages")
@@ -39,7 +39,7 @@ auth.onAuthStateChanged(async (user) => {
       const currentCount = snapshot.size;
       chatBox.innerHTML = "";
 
-      snapshot.forEach((doc, index) => {
+      snapshot.forEach((doc) => {
         const msg = doc.data();
         const isMe = msg.from === user.uid;
         const seen = msg.readBy && msg.readBy.includes(otherUserId);
@@ -68,19 +68,20 @@ auth.onAuthStateChanged(async (user) => {
         }
 
         chatBox.innerHTML += `
-          <div class="chat-msg ${isMe ? "me" : "them"}">
+          <div class="chat-msg ${isMe ? "me" : "them"}" data-id="${doc.id}">
             ${content}
             <div class="meta">
               <span class="time">${timeText}</span>
               ${isMe && seen ? `<span class="seen">Seen</span>` : ""}
             </div>
+            <div class="reactions">${msg.reaction ? msg.reaction : ""}</div>
           </div>
         `;
       });
 
       chatBox.scrollTop = chatBox.scrollHeight;
 
-      // Simple console notification when new message from other user arrives
+      // ✅ Simple console notification when new message arrives
       if (currentCount > lastMessageCount && lastMessageCount !== 0) {
         const lastDoc = snapshot.docs[snapshot.docs.length - 1];
         const lastMsg = lastDoc.data();
@@ -102,10 +103,9 @@ auth.onAuthStateChanged(async (user) => {
       imageUrl: null,
       audioUrl: null,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-      readBy: [user.uid] // sender has seen it
+      readBy: [user.uid]
     });
 
-    // Stop typing when message is sent
     db.collection("chats").doc(chatId).update({
       [`typing.${user.uid}`]: false
     });
@@ -113,7 +113,7 @@ auth.onAuthStateChanged(async (user) => {
     chatMessage.value = "";
   });
 
-  // Allow Enter key to send
+  // ✅ Enter key sends message
   chatMessage.addEventListener("keydown", async (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
@@ -135,10 +135,6 @@ auth.onAuthStateChanged(async (user) => {
 
     if (typing[otherUserId]) {
       chatHeader.innerHTML = `${otherUserName} is typing...`;
-    } else {
-      // Status will be managed by online/offline listener below
-      // If you want, you could fall back to just name here:
-      // chatHeader.innerHTML = otherUserName;
     }
   });
 
@@ -170,7 +166,6 @@ auth.onAuthStateChanged(async (user) => {
   });
 
   // ✅ IMAGE SENDING
-
   imageBtn.addEventListener("click", () => {
     imageInput.click();
   });
@@ -196,10 +191,8 @@ auth.onAuthStateChanged(async (user) => {
   });
 
   // ✅ VOICE NOTES
-
   voiceBtn.addEventListener("click", async () => {
     if (!mediaRecorder || mediaRecorder.state === "inactive") {
-      // Start recording
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       mediaRecorder = new MediaRecorder(stream);
 
@@ -226,12 +219,37 @@ auth.onAuthStateChanged(async (user) => {
       };
 
       mediaRecorder.start();
-      voiceBtn.textContent = "⏹"; // recording
+      voiceBtn.textContent = "⏹";
     } else {
-      // Stop recording
       mediaRecorder.stop();
-      voiceBtn.textContent = "🎤"; // idle
+      voiceBtn.textContent = "🎤";
     }
+  });
+
+  // ✅ MESSAGE REACTIONS (❤️😂👍😮😢🔥)
+  chatBox.addEventListener("click", (e) => {
+    const msgEl = e.target.closest(".chat-msg");
+    if (!msgEl) return;
+
+    const msgId = msgEl.getAttribute("data-id");
+
+    const picker = document.createElement("div");
+    picker.className = "reaction-picker";
+    picker.innerHTML = "❤️ 😂 👍 😮 😢 🔥";
+
+    msgEl.appendChild(picker);
+
+    picker.addEventListener("click", async (ev) => {
+      const reaction = ev.target.textContent;
+
+      await db.collection("chats")
+        .doc(chatId)
+        .collection("messages")
+        .doc(msgId)
+        .update({ reaction });
+
+      picker.remove();
+    });
   });
 
 });
