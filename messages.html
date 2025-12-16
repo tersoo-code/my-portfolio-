@@ -2,7 +2,9 @@
   <div class="chat-header" id="chatHeader"></div>
 
   <div class="chat-box" id="chatBox"></div>
-
+function getChatId(user1, user2) {
+  return user1 < user2 ? `${user1}_${user2}` : `${user2}_${user1}`;
+}
   <div class="chat-input">
     <input type="text" id="chatMessage" placeholder="Type a message...">
     <button id="sendMessageBtn">Send</button>
