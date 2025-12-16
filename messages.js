@@ -39,3 +39,8 @@ auth.onAuthStateChanged(async (user) => {
     chatMessage.value = "";
   });
 });
+chatMessage.addEventListener("input", () => {
+  db.collection("chats").doc(chatId).update({
+    [`typing.${user.uid}`]: chatMessage.value.length > 0
+  });
+});
