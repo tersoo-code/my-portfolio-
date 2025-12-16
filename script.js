@@ -228,7 +228,28 @@ auth.onAuthStateChanged(async (user) => {
           <div class="post-card">
             <img src="${post.imageURL}" class="post-image">
 
-            <div class="post-content">
+            <div class="post-content">const postHTML = `
+  <div class="post-card">
+    <img src="${post.imageURL}" class="post-image">
+
+    <div class="post-content">
+      <p class="post-caption">${post.caption}</p>
+
+      <button class="followBtn" data-user="${post.userId}">Follow</button>
+
+      <div class="post-actions">
+        <button class="likeBtn" data-id="${doc.id}">❤️ Like</button>
+        <span class="likeCount">${post.likes?.length || 0} likes</span>
+      </div>
+
+      <div class="comment-section">
+        <input type="text" class="commentInput" placeholder="Write a comment...">
+        <button class="commentBtn" data-id="${doc.id}">Post</button>
+        <div class="commentList"></div>
+      </div>
+    </div>
+  </div>
+`;
               <p class="post-caption">${post.caption}</p>
 
               <button class="followBtn" data-user="${post.userId}">Follow</button>
@@ -411,4 +432,5 @@ document.addEventListener("click", async (e) => {
     await userRef.update({ following });
   }
 });
+
 
