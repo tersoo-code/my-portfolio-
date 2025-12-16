@@ -503,5 +503,39 @@ input:focus, textarea:focus {
   margin-bottom: 8px;
 }
     
+.nav-icon {
+  cursor: pointer;
+  font-size: 22px;
+  margin-right: 15px;
+}
+
+.notif-dropdown {
+  position: absolute;
+  right: 20px;
+  top: 60px;
+  width: 260px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  max-height: 300px;
+  overflow-y: auto;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  padding: 10px;
+  z-index: 999;
+}
+
+.notif-item {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+}
+
+.notif-item:last-child {
+  border-bottom: none;
+}
+
+.hidden {
+  display: none;
+}
 
 
