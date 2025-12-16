@@ -37,3 +37,28 @@ db.collection("posts")
       `;
     });
   });
+auth.onAuthStateChanged(async (user) => {
+  if (!user) return;
+
+  const currentUserRef = db.collection("users").doc(user.uid);
+  const currentUserDoc = await currentUserRef.get();
+  const following = currentUserDoc.data().following || [];
+
+  if (following.includes(userId)) {
+    followBtn.textContent = "Following";
+  }
+
+  followBtn.addEventListener("click", async () => {
+    let updatedFollowing = following;
+
+    if (updatedFollowing.includes(userId)) {
+      updatedFollowing = updatedFollowing.filter(id => id !== userId);
+      followBtn.textContent = "Follow";
+    } else {
+      updatedFollowing.push(userId);
+      followBtn.textContent = "Following";
+    }
+
+    await currentUserRef.update({ following: updatedFollowing });
+  });
+});
