@@ -10,3 +10,37 @@ function getChatId(user1, user2) {
     <button id="sendMessageBtn">Send</button>
   </div>
 </div>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Chat</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="chat-container">
+    <div id="chatHeader" class="chat-header">Chat</div>
+
+    <div id="chatBox" class="chat-box"></div>
+
+    <div class="chat-input">
+      <input type="file" id="imageInput" accept="image/*" style="display:none;">
+      <button id="imageBtn" class="icon-btn">📷</button>
+      <button id="voiceBtn" class="icon-btn">🎤</button>
+      <input type="text" id="chatMessage" placeholder="Type a message...">
+      <button id="sendMessageBtn">Send</button>
+    </div>
+  </div>
+
+  <!-- Firebase scripts & config (already in your project) -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+
+  <script src="firebase-config.js"></script>
+  <script src="main.js"></script>
+  <script src="messages.js"></script>
+</body>
+</html>
