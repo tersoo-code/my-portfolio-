@@ -489,3 +489,31 @@ auth.onAuthStateChanged(user => {
       }
     });
 });
+auth.onAuthStateChanged((user) => {
+  if (!user) return;
+
+  const userRef = db.collection("users").doc(user.uid);
+
+  // ✅ Mark user online immediately
+  userRef.update({
+    online: true,
+    lastSeen: firebase.firestore.FieldValue.serverTimestamp()
+  });
+
+  // ✅ Mark user offline when the tab closes or reloads
+  window.addEventListener("beforeunload", () => {
+    userRef.update({
+      online: false,
+      lastSeen: firebase.firestore.FieldValue.serverTimestamp()
+    });
+  });
+
+  // ✅ Optional: mark offline when browser loses connection
+  window.addEventListener("offline", () => {
+    userRef.update({
+      online: false,
+      lastSeen: firebase.firestore.FieldValue.serverTimestamp()
+    });
+  });
+
+  // ✅ Optional: mark online when connection returns
