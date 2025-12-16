@@ -235,10 +235,21 @@ auth.onAuthStateChanged(async (user) => {
     <div class="post-content">
       <p class="post-caption">${post.caption}</p>
 
-      <button class="followBtn" data-user="${post.userId}">Follow</button>
+      <button class="followBtn" data-user="${post.userId}">Follow</button>db.collection("notifications").add({
+  type: "follow",
+  fromUser: user.uid,
+  toUser: userId,
+  timestamp: firebase.firestore.FieldValue.serverTimestamp()
+});
 
       <div class="post-actions">
-        <button class="likeBtn" data-id="${doc.id}">❤️ Like</button>
+        db.collection("notifications").add({
+  type: "like",
+  fromUser: user.uid,
+  toUser: post.userId,
+  postId: doc.id,
+  timestamp: firebase.firestore.FieldValue.serverTimestamp()
+});
         <span class="likeCount">${post.likes?.length || 0} likes</span>
       </div>
 
@@ -260,7 +271,13 @@ auth.onAuthStateChanged(async (user) => {
               </div>
 
               <div class="comment-section">
-                <input type="text" class="commentInput" placeholder="Write a comment...">
+                <input type="text" class="commentInput" placeholder="Write a comment...">db.collection("notifications").add({
+  type: "comment",
+  fromUser: user.uid,
+  toUser: post.userId,
+  postId: doc.id,
+  timestamp: firebase.firestore.FieldValue.serverTimestamp()
+});
                 <button class="commentBtn" data-id="${doc.id}">Post</button>
                 <div class="commentList"></div>
               </div>
@@ -440,3 +457,35 @@ notifIcon.addEventListener("click", () => {
   notifDropdown.classList.toggle("hidden");
 });
 
+auth.onAuthStateChanged(user => {
+  if (!user) return;
+
+  db.collection("notifications")
+    .where("toUser", "==", user.uid)
+    .orderBy("timestamp", "desc")
+    .limit(20)
+    .onSnapshot(async snapshot => {
+      notifDropdown.innerHTML = "";
+
+      for (const doc of snapshot.docs) {
+        const notif = doc.data();
+
+        const fromUserDoc = await db.collection("users").doc(notif.fromUser).get();
+        const fromUser = fromUserDoc.data();
+
+        let text = "";
+
+        if (notif.type === "like") {
+          text = `${fromUser.username} liked your post`;
+        } else if (notif.type === "comment") {
+          text = `${fromUser.username} commented on your post`;
+        } else if (notif.type === "follow") {
+          text = `${fromUser.username} started following you`;
+        }
+
+        notifDropdown.innerHTML += `
+          <div class="notif-item">${text}</div>
+        `;
+      }
+    });
+});
