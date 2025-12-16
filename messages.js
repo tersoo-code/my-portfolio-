@@ -44,3 +44,13 @@ chatMessage.addEventListener("input", () => {
     [`typing.${user.uid}`]: chatMessage.value.length > 0
   });
 });
+db.collection("chats").doc(chatId).onSnapshot(doc => {
+  const data = doc.data();
+  const typing = data.typing || {};
+
+  if (typing[otherUserId]) {
+    chatHeader.innerHTML = `${otherUserName} is typing...`;
+  } else {
+    chatHeader.innerHTML = otherUserName;
+  }
+});
