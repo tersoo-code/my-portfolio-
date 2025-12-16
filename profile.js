@@ -62,3 +62,6 @@ auth.onAuthStateChanged(async (user) => {
     await currentUserRef.update({ following: updatedFollowing });
   });
 });
+document.getElementById("messageBtn").addEventListener("click", () => {
+  window.location.href = `messages.html?user=${userId}`;
+});
