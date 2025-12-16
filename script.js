@@ -433,4 +433,10 @@ document.addEventListener("click", async (e) => {
   }
 });
 
+const notifIcon = document.getElementById("notifIcon");
+const notifDropdown = document.getElementById("notifDropdown");
+
+notifIcon.addEventListener("click", () => {
+  notifDropdown.classList.toggle("hidden");
+});
 
