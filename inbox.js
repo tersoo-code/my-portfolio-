@@ -98,18 +98,15 @@ auth.onAuthStateChanged(async (user) => {
       }
 
       chatList.innerHTML += `
-        <div class="chat-item" onclick="openChat('${entry.otherUserId}')">
-          <div class="chat-avatar-circle">${(otherUser.username || "?")[0].toUpperCase()}</div>
-          <div class="chat-info">
-            <h3>${otherUser.username || "User"}</h3>
-            <p>${lastMessage}</p>
-          </div>
-        </div>
-      `;
-    }
-  });
-});
+  <div class="chat-item" onclick="openChat('${entry.otherUserId}')">
+    <div class="chat-avatar-circle">
+      ${(otherUser.username || "?")[0].toUpperCase()}
+      ${otherUser.online ? `<div class="online-dot"></div>` : ""}
+    </div>
 
-function openChat(userId) {
-  window.location.href = `messages.html?user=${userId}`;
-}
+    <div class="chat-info">
+      <h3>${otherUser.username || "User"}</h3>
+      <p>${lastMessage}</p>
+    </div>
+  </div>
+`;
