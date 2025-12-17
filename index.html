@@ -7,9 +7,11 @@
   <meta name="description" content="I design and build digital experiences – modern websites, bold brands, and visual stories that stick." />
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body><<button id="openPost" class="btn primary auth-btn" style="display:none;">Create Post</button>
-  <!-- NAVBAR -->
-  <header class="navbar">
+
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
   <div class="logo">Nexthub_NG.</div>
 
   <nav class="nav-links">
@@ -20,253 +22,217 @@
     <a href="#blog">Social Blog</a>
     <a href="#contact">Contact</a>
 
-    <!-- ✅ Notification Bell + Dropdown -->
     <div id="notifIcon" class="nav-icon">🔔</div>
     <div id="notifDropdown" class="notif-dropdown hidden"></div>
   </nav>
 </header>
 
-  <!-- HERO -->
-  <section id="hero" class="hero"><section class="section" id="feed">
-  <h2>Latest Posts</h2>
-  <div id="feedContainer" class="gallery-grid"></div>
+<!-- HERO -->
+<section id="hero" class="hero">
+
+  <section class="section" id="feed">
+    <h2>Latest Posts</h2>
+    <div id="feedContainer" class="gallery-grid"></div>
+  </section>
+
+  <div class="hero-text">
+    <h1>Design that speaks. Experiences that stay.</h1>
+    <p>I craft digital experiences that blend clarity, creativity, and purpose — helping brands stand out with design that actually works.</p>
+
+    <div class="hero-actions">
+      <a href="#portfolio" class="btn primary">Explore my work</a>
+      <a href="#services" class="btn ghost">What I offer</a>
+    </div>
+  </div>
+
+  <div class="hero-image">
+    <img src="assets/images/hero-image.jpg" alt="Creative web and brand design" />
+  </div>
+
 </section>
-    <div class="hero-text">
-      <h1>Design that speaks. Experiences that stay.</h1>
-      <p>
-        I craft digital experiences that blend clarity, creativity, and purpose —
-        helping brands stand out with design that actually works.
-      </p>
-      <div class="hero-actions">
-        <a href="#portfolio" class="btn primary">Explore my work</a>
-        <a href="#services" class="btn ghost">What I offer</a>
-      </div>
+
+<!-- SERVICES -->
+<section id="services" class="section">
+  <h2>Services</h2>
+  <p class="section-intro">I help brands and individuals move from “just online” to “unforgettable”.</p>
+
+  <div class="services-grid">
+    <article class="service-card">
+      <h3>Web Design</h3>
+      <p>Modern, responsive, conversion‑focused websites built with clean layouts and thoughtful user experience.</p>
+      <ul>
+        <li>Responsive layouts</li>
+        <li>Landing pages & portfolios</li>
+        <li>Basic animations & interactions</li>
+      </ul>
+    </article>
+
+    <article class="service-card">
+      <h3>Brand Identity</h3>
+      <p>Logos, color systems, and visual language that give your brand a recognizable, consistent presence.</p>
+      <ul>
+        <li>Logo concepts & refinements</li>
+        <li>Color & typography systems</li>
+        <li>Basic brand guidelines</li>
+      </ul>
+    </article>
+
+    <article class="service-card">
+      <h3>Photography</h3>
+      <p>Story‑driven visuals for brands, creators, and small businesses that need images that actually connect.</p>
+      <ul>
+        <li>Product & brand shots</li>
+        <li>Portraits for personal brands</li>
+        <li>Content for socials & websites</li>
+      </ul>
+    </article>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="section section-alt">
+  <div class="about-layout">
+    <div>
+      <h2>About me</h2>
+      <p>I’m Tersoo, a designer and developer who enjoys turning ideas into clear, usable, and visually sharp digital experiences.</p>
+      <p>I started with simple HTML and CSS projects, then moved into full websites, better UX, and more intentional branding.</p>
     </div>
-    <div class="hero-image">
-      <!-- Replace with your image -->
-      <img src="assets/hero-image.jpg" alt="Creative web and brand design" />
+
+    <div class="about-meta">
+      <h3>Skills & tools</h3>
+      <ul>
+        <li>HTML, CSS, JavaScript</li>
+        <li>Responsive web design</li>
+        <li>UI/UX fundamentals</li>
+        <li>Basic animations & interactions</li>
+        <li>Brand identity & visual direction</li>
+      </ul>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- SERVICES -->
-  <section id="services" class="section">
-    <h2>Services</h2>
-    <p class="section-intro">
-      I help brands and individuals move from “just online” to “unforgettable”.
-    </p>
-    <div class="services-grid">
-      <article class="service-card">
-        <h3>Web Design</h3>
-        <p>
-          Modern, responsive, conversion‑focused websites built with clean layouts and thoughtful user experience.
-        </p>
-        <ul>
-          <li>Responsive layouts</li>
-          <li>Landing pages & portfolios</li>
-          <li>Basic animations & interactions</li>
-        </ul>
-      </article>
+<!-- TIMELINE -->
+<section id="timeline" class="section">
+  <h2>Journey</h2>
 
-      <article class="service-card">
-        <h3>Brand Identity</h3>
-        <p>
-          Logos, color systems, and visual language that give your brand a recognizable, consistent presence.
-        </p>
-        <ul>
-          <li>Logo concepts & refinements</li>
-          <li>Color & typography systems</li>
-          <li>Basic brand guidelines</li>
-        </ul>
-      </article>
-
-      <article class="service-card">
-        <h3>Photography</h3>
-        <p>
-          Story‑driven visuals for brands, creators, and small businesses that need images that actually connect.
-        </p>
-        <ul>
-          <li>Product & brand shots</li>
-          <li>Portraits for personal brands</li>
-          <li>Content for socials & websites</li>
-        </ul>
-      </article>
+  <div class="timeline">
+    <div class="timeline-item">
+      <span class="timeline-year">2025</span>
+      <h3>The spark</h3>
+      <p>Started with the basics — HTML, CSS, and a few small personal projects.</p>
     </div>
-  </section>
 
-  <!-- ABOUT -->
-  <section id="about" class="section section-alt">
-    <div class="about-layout">
-      <div>
-        <h2>About me</h2>
-        <p>
-          I’m Tersoo, a designer and developer who enjoys turning ideas into clear, usable, and visually sharp
-          digital experiences. I focus on the details that most people overlook — alignment, motion, spacing,
-          and how things actually feel to use.
-        </p>
-        <p>
-          I started with simple HTML and CSS projects, then moved into full websites, better UX, and more
-          intentional branding. Now, I’m building not just pages, but experiences — including social‑style
-          platforms that feel alive and interactive.
-        </p>
-      </div>
-      <div class="about-meta">
-        <h3>Skills & tools</h3>
-        <ul>
-          <li>HTML, CSS, JavaScript</li>
-          <li>Responsive web design</li>
-          <li>UI/UX fundamentals</li>
-          <li>Basic animations & interactions</li>
-          <li>Brand identity & visual direction</li>
-        </ul>
-      </div>
+    <div class="timeline-item">
+      <span class="timeline-year">2025</span>
+      <h3>First real clients</h3>
+      <p>Designed and shipped websites for small businesses.</p>
     </div>
-  </section>
 
-  <!-- TIMELINE -->
-  <section id="timeline" class="section">
-    <h2>Journey</h2>
-    <div class="timeline">
-      <div class="timeline-item">
-        <span class="timeline-year">2025
-        </span>
-        <h3>The spark</h3>
-        <p>
-          Started with the basics — HTML, CSS, and a few small personal projects that made the web feel real to me.
-        </p>
-      </div>
-      <div class="timeline-item">
-        <span class="timeline-year">2025
-        </span>
-        <h3>First real clients</h3>
-        <p>
-          Designed and shipped websites for small businesses, learning how to solve real problems and meet deadlines.
-        </p>
-      </div>
-      <div class="timeline-item">
-        <span class="timeline-year">2025</span>
-        <h3>Leveling up</h3>
-        <p>
-          Focused on UX, animations, and building more polished, interactive experiences — including social‑style platforms.
-        </p>
-      </div>
+    <div class="timeline-item">
+      <span class="timeline-year">2025</span>
+      <h3>Leveling up</h3>
+      <p>Focused on UX, animations, and building more polished, interactive experiences.</p>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- PORTFOLIO / GALLERY -->
-  <section id="portfolio" class="section section-alt">
-    <h2>Selected work</h2>
-    <p class="section-intro">
-      A few projects that show how I think about layout, interaction, and brand.
-    </p>
-    <div class="gallery-grid" id="gallery">
-      <!-- You can later render these from JS or Firebase -->
-      <figure class="gallery-item">
-        <img src="assets/project1.jpg" alt="Sample website project" />
-        <figcaption>Modern business landing page</figcaption>
-      </figure>
-      <figure class="gallery-item">
-        <img src="assets/project2.jpg" alt="Brand identity project" />
-        <figcaption>Brand identity for a local brand</figcaption>
-      </figure>
-      <figure class="gallery-item">
-        <img src="assets/project3.jpg" alt="Photography project" />
-        <figcaption>Portrait & lifestyle photography set</figcaption>
-      </figure>
+<!-- PORTFOLIO -->
+<section id="portfolio" class="section section-alt">
+  <h2>Selected work</h2>
+  <p class="section-intro">A few projects that show how I think about layout, interaction, and brand.</p>
+
+  <div class="gallery-grid" id="gallery">
+    <figure class="gallery-item">
+      <img src="assets/images/project1.jpg" alt="Sample website project" />
+      <figcaption>Modern business landing page</figcaption>
+    </figure>
+
+    <figure class="gallery-item">
+      <img src="assets/images/project2.jpg" alt="Brand identity project" />
+      <figcaption>Brand identity for a local brand</figcaption>
+    </figure>
+
+    <figure class="gallery-item">
+      <img src="assets/images/project3.jpg" alt="Photography project" />
+      <figcaption>Portrait & lifestyle photography set</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section id="blog" class="section">
+  <h2>Social blog</h2>
+  <p class="section-intro">I’m building this into a mini social platform.</p>
+
+  <div class="blog-preview">
+    <article class="post-card">
+      <h3>Behind the pixels</h3>
+      <p>Thoughts on learning in public and designing with intention.</p>
+      <span class="meta">Concept • Social‑style platform in progress</span>
+    </article>
+
+    <article class="post-card">
+      <h3>From static pages to living interfaces</h3>
+      <p>How I’m moving from static portfolio sites to interactive spaces.</p>
+      <span class="meta">Design • Product thinking</span>
+    </article>
+  </div>
+
+  <p class="coming-soon">Soon, this section will be powered by real users, posts, likes, and comments — built with Firebase.</p>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials" class="section section-alt">
+  <h2>What people say</h2>
+
+  <div class="testimonials-grid">
+    <article class="testimonial">
+      <p>“Delivered a clean, modern website that helped us look professional.”</p>
+      <span class="author">Client A</span>
+    </article>
+
+    <article class="testimonial">
+      <p>“Great communication and a strong eye for layout.”</p>
+      <span class="author">Client B</span>
+    </article>
+
+    <article class="testimonial">
+      <p>“Our brand finally feels consistent across our website and socials.”</p>
+      <span class="author">Client C</span>
+    </article>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section">
+  <h2>Let’s build something</h2>
+  <p class="section-intro">Tell me about your idea, and I’ll get back to you.</p>
+
+  <form class="contact-form">
+    <div class="form-row">
+      <input type="text" name="name" placeholder="Your name" required />
     </div>
-  </section>
 
-  <!-- SOCIAL-STYLE BLOG PLACEHOLDER -->
-  <section id="blog" class="section">
-    <h2>Social blog</h2>
-    <p class="section-intro">
-      I’m building this into a mini social platform — a place where users can share posts, images, and ideas.
-    </p>
-    <!-- Later: Replace with dynamic feed from Firebase -->
-    <div class="blog-preview">
-      <article class="post-card">
-        <h3>Behind the pixels</h3>
-        <p>
-          Thoughts on learning in public, designing with intention, and why the small details matter in digital
-          experiences.
-        </p>
-        <span class="meta">Concept • Social‑style platform in progress</span>
-      </article>
-      <article class="post-card">
-        <h3>From static pages to living interfaces</h3>
-        <p>
-          How I’m moving from static portfolio sites to interactive spaces that behave more like social media.
-        </p>
-        <span class="meta">Design • Product thinking</span>
-      </article>
+    <div class="form-row">
+      <input type="email" name="email" placeholder="Your email" required />
     </div>
-    <p class="coming-soon">
-      Soon, this section will be powered by real users, posts, likes, and comments — built with Firebase.
-    </p>
-  </section><button class="followBtn" data-user="${post.userId}">Follow</button>
 
-  <!-- TESTIMONIALS -->
-  <section id="testimonials" class="section section-alt">
-    <h2>What people say</h2>
-    <div class="testimonials-grid">
-      <article class="testimonial">
-        <p>
-          “Delivered a clean, modern website that actually helped us look professional online. Easy to work with and very patient.”
-        </p>
-        <span class="author">Client A — Small business owner</span>
-      </article>
-      <article class="testimonial">
-        <p>
-          “Great communication, clear updates, and a strong eye for layout. The final result looked better than what I imagined.”
-        </p>
-        <span class="author">Client B — Creative professional</span>
-      </article>
-      <article class="testimonial">
-        <p>
-          “Our brand finally feels consistent across our website and socials. The design work has already helped us attract more clients.”
-        </p>
-        <span class="author">Client C — Local brand</span>
-      </article>
+    <div class="form-row">
+      <textarea name="message" rows="4" placeholder="Tell me about your project" required></textarea>
     </div>
-  </section>
 
-  <!-- CONTACT -->
-  <section id="contact" class="section">
-    <h2>Let’s build something</h2>
-    <p class="section-intro">
-      Tell me about your idea, and I’ll get back to you as soon as I can.
-    </p>
-    <form class="contact-form">
-      <div class="form-row">
-        <input type="text" name="name" placeholder="Your name" required />
-      </div>
-      <div class="form-row">
-        <input type="email" name="email" placeholder="Your email" required />
-      </div>
-      <div class="form-row">
-        <textarea name="message" rows="4" placeholder="Tell me about your project" required></textarea>
-      </div>
-      <button type="submit" class="btn primary">Send message</button>
-    </form>
-    <div class="contact-meta">
-      <p>Based in Lagos, Nigeria available for remote work worldwide.</p>
-    </div>
-  </section>
+    <button type="submit" class="btn primary">Send message</button>
+  </form>
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <p>© 2025 Nexthub_NG
-      . Craft. Create. Impact.</p>
-    <div class="social-links">
-      <a href="#" target="_blank" rel="noreferrer">Instagram</a>
-      <a href="#" target="_blank" rel="noreferrer">X</a>
-      <a href="#" target="_blank" rel="noreferrer">GitHub</a>
-    </div>
-  </footer>
+  <div class="contact-meta">
+    <p>Based in Lagos, Nigeria — available worldwide.</p>
+  </div>
+</section>
 
-  <script src="main.js"></script>
-</body><!-- FOOTER -->
+<!-- FOOTER -->
 <footer class="footer">
   <p>© 2025 Nexthub_NG. Craft. Create. Impact.</p>
+
   <div class="social-links">
     <a href="#">Instagram</a>
     <a href="#">X</a>
@@ -274,17 +240,7 @@
   </div>
 </footer>
 
-<!-- ✅ ADD FIREBASE SCRIPTS HERE -->
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js"></script>
-
-<!-- ✅ THEN LOAD YOUR MAIN JS -->
-<script src="main.js"></script>
-
-</body><!-- AUTH MODAL -->
+<!-- AUTH MODAL -->
 <div id="authModal" class="auth-modal">
   <div class="auth-box">
     <h2 id="authTitle">Create Account</h2>
@@ -294,7 +250,7 @@
 
     <button id="authActionBtn" class="btn primary">Sign Up</button>
 
-    <p class="auth-switch">]
+    <p class="auth-switch">
       Already have an account?
       <span id="switchToLogin">Login</span>
     </p>
@@ -303,10 +259,10 @@
   </div>
 </div>
 
-<!-- AUTH BUTTON IN NAV -->
 <button id="openAuth" class="btn ghost auth-btn">Login</button>
-</html><button id="logoutBtn" class="btn ghost auth-btn" style="display:none;">Logout</button>
-</html><!-- PROFILE MODAL -->
+<button id="logoutBtn" class="btn ghost auth-btn" style="display:none;">Logout</button>
+
+<!-- PROFILE MODAL -->
 <div id="profileModal" class="auth-modal">
   <div class="auth-box">
     <h2>Edit Profile</h2>
@@ -318,14 +274,13 @@
     <input type="file" id="profileImage" accept="image/*" />
 
     <button id="saveProfileBtn" class="btn primary">Save Profile</button>
-
     <button id="closeProfile" class="close-auth">×</button>
   </div>
 </div>
 
-<!-- BUTTON TO OPEN PROFILE -->
 <button id="openProfile" class="btn ghost auth-btn" style="display:none;">Profile</button>
-<!-- POST UPLOAD MODAL -->
+
+<!-- POST MODAL -->
 <div id="postModal" class="auth-modal">
   <div class="auth-box">
     <h2>Create Post</h2>
@@ -334,17 +289,25 @@
     <textarea id="postCaption" placeholder="Write a caption..."></textarea>
 
     <button id="uploadPostBtn" class="btn primary">Upload Post</button>
-
     <button id="closePost" class="close-auth">×</button>
   </div>
 </div>
 
+<!-- FIREBASE -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
 
+  const firebaseConfig = {
+    // your config here
+  };
 
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
 
+<!-- MAIN JS -->
+<script src="main.js"></script>
 
-
-
-
-
-
+</body>
+</html>
