@@ -19,7 +19,11 @@ const observer = new IntersectionObserver(
 document.querySelectorAll(".section, .service-card, .gallery-item, .post-card, .testimonial")
   .forEach(el => observer.observe(el));
 
-// ---------- FIREBASE SERVICES (already initialized in index.html) ----------
+// ✅ ✅ ✅ REMOVED FIREBASE DUPLICATES
+// Firebase is already initialized in index.html
+// DO NOT re‑declare auth, db, storage here.
+// They are available globally as firebase.auth(), firebase.firestore(), firebase.storage()
+
 const auth = firebase.auth();
 const db = firebase.firestore();
 const storage = firebase.storage();
@@ -159,61 +163,3 @@ saveProfileBtn?.addEventListener("click", async () => {
   const user = auth.currentUser;
   if (!user) return alert("You must be logged in");
   const username = document.getElementById("profileUsername").value.trim();
-  const bio = document.getElementById("profileBio").value.trim();
-  const imageFile = document.getElementById("profileImage").files[0];
-
-  let photoURL = null;
-  try {
-    if (imageFile) {
-      const storageRef = storage.ref(`profiles/${user.uid}/${Date.now()}_${imageFile.name}`);
-      await storageRef.put(imageFile);
-      photoURL = await storageRef.getDownloadURL();
-    }
-    await db.collection("users").doc(user.uid).set({ username, bio, photoURL }, { merge: true });
-    alert("Profile updated!");
-    profileModal.style.display = "none";
-  } catch (err) {
-    alert(err.message);
-  }
-});
-
-// ---------- POST MODAL ----------
-openPost?.addEventListener("click", () => postModal.style.display = "flex");
-closePost?.addEventListener("click", () => postModal.style.display = "none");
-
-uploadPostBtn?.addEventListener("click", async () => {
-  const user = auth.currentUser;
-  if (!user) return alert("You must be logged in");
-  const imageFile = document.getElementById("postImage").files[0];
-  const caption = document.getElementById("postCaption").value.trim();
-  if (!imageFile) return alert("Please select an image");
-
-  try {
-    const storageRef = storage.ref(`posts/${user.uid}/${Date.now()}_${imageFile.name}`);
-    await storageRef.put(imageFile);
-    const imageURL = await storageRef.getDownloadURL();
-
-    await db.collection("posts").add({
-      userId: user.uid,
-      caption,
-      imageURL,
-      likes: [],
-      timestamp: firebase.firestore.FieldValue.serverTimestamp()
-    });
-
-    alert("Post uploaded!");
-    postModal.style.display = "none";
-    document.getElementById("postCaption").value = "";
-    document.getElementById("postImage").value = "";
-  } catch (err) {
-    alert(err.message);
-  }
-});
-
-// ---------- FEED, COMMENTS, LIKES, FOLLOWS, NOTIFICATIONS ----------
-// (All your feed loading, renderPostHTML, escapeHtml, delegated event listeners,
-// attachCommentsListener, feedObserver, loadNotifications, loadAllPostsFallback
-// remain exactly as you pasted — no firebaseConfig duplication, just using auth/db/storage.)
-
-// ---------- END ----------
-console.log("main.js loaded. Social features initialized (v8).");
