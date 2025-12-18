@@ -231,3 +231,4 @@ uploadPostBtn?.addEventListener("click", async () => {
 });
 
 console.log("main.js loaded. Social features initialized (v8).");
+
