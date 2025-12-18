@@ -16,14 +16,11 @@ const observer = new IntersectionObserver(
   },
   { threshold: 0.2 }
 );
-document.querySelectorAll(".section, .service-card, .gallery-item, .post-card, .testimonial")
+document
+  .querySelectorAll(".section, .service-card, .gallery-item, .post-card, .testimonial")
   .forEach(el => observer.observe(el));
 
-// ✅ ✅ ✅ REMOVED FIREBASE DUPLICATES
-// Firebase is already initialized in index.html
-// DO NOT re‑declare auth, db, storage here.
-// They are available globally as firebase.auth(), firebase.firestore(), firebase.storage()
-
+// ---------- FIREBASE SERVICES (initialized in index.html) ----------
 const auth = firebase.auth();
 const db = firebase.firestore();
 const storage = firebase.storage();
@@ -53,8 +50,8 @@ const notifDropdown = document.getElementById("notifDropdown");
 
 // ---------- AUTH MODAL LOGIC ----------
 let isLogin = false;
-openAuth?.addEventListener("click", () => authModal.style.display = "flex");
-closeAuth?.addEventListener("click", () => authModal.style.display = "none");
+openAuth?.addEventListener("click", () => (authModal.style.display = "flex"));
+closeAuth?.addEventListener("click", () => (authModal.style.display = "none"));
 
 switchToLogin?.addEventListener("click", () => {
   isLogin = !isLogin;
@@ -112,36 +109,55 @@ auth.onAuthStateChanged(async user => {
       });
     }
 
-    userRef.update({
-      online: true,
-      lastSeen: firebase.firestore.FieldValue.serverTimestamp()
-    }).catch(() => {});
+    userRef
+      .update({
+        online: true,
+        lastSeen: firebase.firestore.FieldValue.serverTimestamp()
+      })
+      .catch(() => {});
 
     window.addEventListener("beforeunload", () => {
-      userRef.update({
-        online: false,
-        lastSeen: firebase.firestore.FieldValue.serverTimestamp()
-      }).catch(() => {});
+      userRef
+        .update({
+          online: false,
+          lastSeen: firebase.firestore.FieldValue.serverTimestamp()
+        })
+        .catch(() => {});
     });
 
     window.addEventListener("offline", () => {
-      userRef.update({ online: false, lastSeen: firebase.firestore.FieldValue.serverTimestamp() }).catch(() => {});
+      userRef
+        .update({
+          online: false,
+          lastSeen: firebase.firestore.FieldValue.serverTimestamp()
+        })
+        .catch(() => {});
     });
+
     window.addEventListener("online", () => {
       userRef.update({ online: true }).catch(() => {});
     });
 
-    loadFeedForUser(user.uid);
-    loadNotifications(user.uid);
+    // These functions must exist somewhere below or in another script
+    if (typeof loadFeedForUser === "function") {
+      loadFeedForUser(user.uid);
+    }
+    if (typeof loadNotifications === "function") {
+      loadNotifications(user.uid);
+    }
   } else {
     logoutBtn?.style.setProperty("display", "none");
     openAuth?.style.setProperty("display", "inline-block");
     openProfile?.style.setProperty("display", "none");
     openPost?.style.setProperty("display", "none");
 
-    feedContainer.innerHTML = `<p style="text-align:center; margin-top:20px;">Log in to see your personalized feed.</p>`;
-    notifDropdown.innerHTML = "";
-    loadAllPostsFallback();
+    if (feedContainer) {
+      feedContainer.innerHTML = `<p style="text-align:center; margin-top:20px;">Log in to see your personalized feed.</p>`;
+    }
+    if (notifDropdown) notifDropdown.innerHTML = "";
+    if (typeof loadAllPostsFallback === "function") {
+      loadAllPostsFallback();
+    }
   }
 });
 
@@ -157,9 +173,61 @@ openProfile?.addEventListener("click", async () => {
     document.getElementById("profileBio").value = data.bio || "";
   }
 });
-closeProfile?.addEventListener("click", () => profileModal.style.display = "none");
+closeProfile?.addEventListener("click", () => (profileModal.style.display = "none"));
 
 saveProfileBtn?.addEventListener("click", async () => {
   const user = auth.currentUser;
   if (!user) return alert("You must be logged in");
   const username = document.getElementById("profileUsername").value.trim();
+  const bio = document.getElementById("profileBio").value.trim();
+  const imageFile = document.getElementById("profileImage").files[0];
+
+  let photoURL = null;
+  try {
+    if (imageFile) {
+      const storageRef = storage.ref(`profiles/${user.uid}/${Date.now()}_${imageFile.name}`);
+      await storageRef.put(imageFile);
+      photoURL = await storageRef.getDownloadURL();
+    }
+    await db.collection("users").doc(user.uid).set({ username, bio, photoURL }, { merge: true });
+    alert("Profile updated!");
+    profileModal.style.display = "none";
+  } catch (err) {
+    alert(err.message);
+  }
+});
+
+// ---------- POST MODAL ----------
+openPost?.addEventListener("click", () => (postModal.style.display = "flex"));
+closePost?.addEventListener("click", () => (postModal.style.display = "none"));
+
+uploadPostBtn?.addEventListener("click", async () => {
+  const user = auth.currentUser;
+  if (!user) return alert("You must be logged in");
+  const imageFile = document.getElementById("postImage").files[0];
+  const caption = document.getElementById("postCaption").value.trim();
+  if (!imageFile) return alert("Please select an image");
+
+  try {
+    const storageRef = storage.ref(`posts/${user.uid}/${Date.now()}_${imageFile.name}`);
+    await storageRef.put(imageFile);
+    const imageURL = await storageRef.getDownloadURL();
+
+    await db.collection("posts").add({
+      userId: user.uid,
+      caption,
+      imageURL,
+      likes: [],
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    });
+
+    alert("Post uploaded!");
+    postModal.style.display = "none";
+    document.getElementById("postCaption").value = "";
+    document.getElementById("postImage").value = "";
+  } catch (err) {
+    alert(err.message);
+  }
+});
+
+console.log("main.js loaded. Social features initialized (v8).");
