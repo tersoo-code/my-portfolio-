@@ -302,12 +302,31 @@
     // your config here
   };
 
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
+  <!-- Firebase v8 scripts -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyBwIpkPvU8tlswKKuZnWHyv31ERuaBbH2U",
+    authDomain: "nexthub-ng.firebaseapp.com",
+    projectId: "nexthub-ng",
+    storageBucket: "nexthub-ng.firebasestorage.app",
+    messagingSenderId: "852092143024",
+    appId: "1:852092143024:web:fa8f2767bf7a3aa4628275",
+    measurementId: "G-16DGRQJHT2"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+  const storage = firebase.storage();
 </script>
 
-<!-- MAIN JS -->
+<!-- Your main JavaScript file -->
 <script src="main.js"></script>
-
-</body>
-</html>
