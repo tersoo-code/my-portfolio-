@@ -291,8 +291,7 @@
     <button id="uploadPostBtn" class="btn primary">Upload Post</button>
     <button id="closePost" class="close-auth">×</button>
   </div>
-</div>
-
+</div> 
 <!-- Firebase v8 scripts -->
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
@@ -306,7 +305,7 @@
     apiKey: "AIzaSyBwIpkPvU8tlswKKuZnWHyv31ERuaBbH2U",
     authDomain: "nexthub-ng.firebaseapp.com",
     projectId: "nexthub-ng",
-    storageBucket: "nexthub-ng.firebasestorage.app",
+    storageBucket: "nexthub-ng.appspot.com",  // <-- FIXED
     messagingSenderId: "852092143024",
     appId: "1:852092143024:web:fa8f2767bf7a3aa4628275",
     measurementId: "G-16DGRQJHT2"
@@ -315,12 +314,7 @@
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
   firebase.analytics();
-
-  // Firebase services
-  const auth = firebase.auth();
-  const db = firebase.firestore();
-  const storage = firebase.storage();
 </script>
 
-<!-- Your main JavaScript file -->
+<!-- Your main JavaScript file (must be AFTER Firebase scripts) -->
 <script src="main.js"></script>
