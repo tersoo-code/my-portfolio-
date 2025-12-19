@@ -75,3 +75,15 @@
   color: #999;
   margin-left: 10px;
 }
+body {
+  background: linear-gradient(
+      rgba(0,0,0,0.6),   /* dark overlay */
+      rgba(0,0,0,0.6)    /* keeps it consistent */
+    ), url("assets/images/IMG_6479.jpg") no-repeat center center fixed;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: #fff; /* makes text stand out */
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
