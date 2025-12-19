@@ -790,4 +790,10 @@ input:focus, textarea:focus {
   width: 200px;
   margin-bottom: 4px;
    }
+body {
+  background: url("assets/images/IMG_6479.jpg") no-repeat center center fixed;
+  background-size: cover;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
 
