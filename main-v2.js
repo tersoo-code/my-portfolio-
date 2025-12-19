@@ -229,6 +229,5 @@ uploadPostBtn?.addEventListener("click", async () => {
     alert(err.message);
   }
 });
-
-console.log("main.js loaded. Social features initialized (v8).");
+console.log("main-v2.js loaded. Social features initialized (v8).");
 
