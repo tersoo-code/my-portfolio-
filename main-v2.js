@@ -1,23 +1,29 @@
-// ---------- SMOOTH SCROLLING ----------
-document.querySelectorAll('a[href^="#"]').forEach(link => {
-  link.addEventListener("click", function (e) {
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute("href"));
-    if (target) target.scrollIntoView({ behavior: "smooth" });
-  });
+// Handle Auth modal open/close
+document.querySelector('#openAuth').addEventListener('click', () => {
+  document.querySelector('#authModal').style.display = 'flex';
 });
 
-// ---------- FADE-IN ANIMATION ----------
-const observer = new IntersectionObserver(
-  entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) entry.target.classList.add("visible");
-    });
-  },
-  { threshold: 0.2 }
-);
-document
-  .querySelectorAll(".section, .service-card, .gallery-item, .post-card, .testimonial")
+document.querySelector('#closeAuth').addEventListener('click', () => {
+  document.querySelector('#authModal').style.display = 'none';
+});
+
+// Handle Profile modal open/close
+document.querySelector('#openProfile').addEventListener('click', () => {
+  document.querySelector('#profileModal').style.display = 'flex';
+});
+
+document.querySelector('#closeProfile').addEventListener('click', () => {
+  document.querySelector('#profileModal').style.display = 'none';
+});
+
+// Handle Post modal open/close
+document.querySelector('#uploadPostBtn').addEventListener('click', () => {
+  document.querySelector('#postModal').style.display = 'flex';
+});
+
+document.querySelector('#closePost').addEventListener('click', () => {
+  document.querySelector('#postModal').style.display = 'none';
+});
   .forEach(el => observer.observe(el));
 
 // ---------- FIREBASE SERVICES (initialized in index.html) ----------
@@ -230,4 +236,5 @@ uploadPostBtn?.addEventListener("click", async () => {
   }
 });
 console.log("main-v2.js loaded. Social features initialized (v8).");
+
 
